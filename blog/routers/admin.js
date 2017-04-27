@@ -35,7 +35,7 @@ router.get('/user', function(req, res){
     * */
 
     var page = Number(req.query.page || 1);
-    var limit = 2;
+    var limit = 10;
     var pages = 0;
 
     User.count().then(function(count){
@@ -68,10 +68,10 @@ router.get('/user', function(req, res){
 
 router.get('/category', function(req, res, next){
     var page = Number(req.query.page || 1);
-    var limit = 2;
+    var limit = 10;
     var pages = 0;
 
-    User.count().then(function(count){
+    Category.count().then(function(count){
         //計算總頁數
         pages = Math.ceil(count / limit);
         page = Math.min(page, pages);
@@ -80,7 +80,8 @@ router.get('/category', function(req, res, next){
 
         var skip = (page - 1) * limit;
 
-        Category.find().limit(limit).skip(skip).then(function(categories){
+        /*sort()中：1是升序；-1是降序*/
+        Category.find().sort({_id: -1}).limit(limit).skip(skip).then(function(categories){
             res.render('admin/category_index', {
                 userInfo: req.userInfo,
                 categories: categories,
