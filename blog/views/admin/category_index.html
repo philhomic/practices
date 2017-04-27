@@ -15,10 +15,20 @@
 
     <tr>
         <th>ID</th>
-        <th>用戶名</th>
-        <th>密碼</th>
-        <th>是否是管理員</th>
+        <th>分类名称</th>
+        <th>操作</th>
     </tr>
+
+    {% for category in categories %}
+    <tr>
+        <td>{{category._id.toString()}}</td>
+        <td>{{category.name}}</td>
+        <td>
+            <a href="/admin/category/edit?id={{category._id.toString()}}">修改</a> |
+            <a href="/admin/category/delete?id={{category._id.toString()}}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
 
 
 </table>
