@@ -1,4 +1,4 @@
-var prepage = 10;
+var perpage = 10;
 var page = 1;
 var pages = 0;
 var comments = [];
@@ -13,7 +13,6 @@ $('#messageBtn').on('click', function() {
             content: $('#messageContent').val()
         },
         success: function(responseData) {
-            //console.log(responseData);
             $('#messageContent').val('');
             comments = responseData.data.comments.reverse();
             renderComment();
@@ -46,9 +45,9 @@ function renderComment() {
 
     $('#messageCount').html(comments.length);
 
-    pages = Math.max(Math.ceil(comments.length / prepage), 1);
-    var start = Math.max(0, (page-1) * prepage);
-    var end = Math.min(start + prepage, comments.length);
+    pages = Math.max(Math.ceil(comments.length / perpage), 1);
+    var start = Math.max(0, (page-1) * perpage);
+    var end = Math.min(start + perpage, comments.length);
 
     var $lis = $('.pager li');
     $lis.eq(1).html( page + ' / ' +  pages);
