@@ -25,12 +25,5 @@ export default new Router({
       path: '/ratings',
         component: ratings
     }
-/*
-   {
-      path: '/',
-      name: 'Hello',
-      component: Hello
-    }
-*/
   ]
 });
