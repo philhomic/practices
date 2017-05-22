@@ -32,7 +32,7 @@
         response = response.body;
         if (response.errno === ERR_OK) {
           this.seller = response.data;
-          console.log(this.seller);
+          // console.log(this.seller);
         }
       }
       // 因为是mock的数据，所以肯定会成功，所以这里就不添加error的函数了
