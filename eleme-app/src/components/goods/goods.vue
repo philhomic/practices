@@ -31,7 +31,7 @@
                   <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol :food="food"></cartcontrol>
+                  <cartcontrol :food="food" v-on:cartadd="_drop"></cartcontrol>
                 </div>
               </div>
             </li>
@@ -39,7 +39,7 @@
         </li>
       </ul>
     </div>
-    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <shopcart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -72,6 +72,17 @@
           }
         }
         return 0;
+      },
+      selectFoods () {
+        let foods = [];
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count) {
+              foods.push(food);
+            }
+          });
+        });
+        return foods;
       }
     },
     created () {
@@ -95,6 +106,7 @@
           click: true
         });
         this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
+          click: true,
           probeType: 3
         });
         this.foodsScroll.on('scroll', (pos) => {
@@ -121,6 +133,13 @@
         let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
         let el = foodList[index];
         this.foodsScroll.scrollToElement(el, 300);
+      },
+      _drop (target) {
+        // console.log(target);
+        // 体验优化，异步执行下落动画
+        // this.$nextTick(() => {
+          this.$refs.shopcart.drop(target);
+        // });
       }
     },
     components: {
