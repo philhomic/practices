@@ -39,8 +39,8 @@
         </li>
       </ul>
     </div>
-    <shopcart ref="shopcart" :select-foods="selectedFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
-    <food :food="selectFood"></food>
+    <shopcart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <food :food="selectedFood" ref="food"></food>
   </div>
 </template>
 
@@ -61,7 +61,8 @@
       return {
         goods: [],
         listHeight: [],
-        scrollY: 0
+        scrollY: 0,
+        selectedFood: {}
       };
     },
     computed: {
@@ -150,6 +151,7 @@
           return;
         }
         this.selectedFood = food;
+        this.$refs.food.show();
       }
     },
     components: {

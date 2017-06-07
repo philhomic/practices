@@ -1,7 +1,10 @@
 <template>
-  <div v-show="showFlag" class="food">
+  <transition name="move">
+    <div v-show="showFlag" class="food">
 
-  </div>
+    </div>
+  </transition>
+
 </template>
 
 <script type="text/ecmascript-6">
@@ -9,6 +12,16 @@
     props: {
       food: {
         type: Object
+      }
+    },
+    data () {
+      return {
+        showFlag: false
+      };
+    },
+    methods: {
+      show () {
+        this.showFlag = true;
       }
     }
   };
@@ -23,4 +36,8 @@
     z-index: 30
     width: 100%
     background: #fff
+  .move-enter-active, .move-leave-active
+    transition: all .5s
+  .move-enter, .move-leave-active
+    transform: translate3d(100%, 0, 0);
 </style>
