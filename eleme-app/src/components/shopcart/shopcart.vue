@@ -169,7 +169,7 @@
         }
       },
       beforeEnter (el) {
-        console.log(el);
+        // console.log(el);
         let count = this.balls.length;
         while (count--) {
           let ball = this.balls[count];
