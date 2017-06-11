@@ -245,6 +245,7 @@
       background: #141d27
       font-size: 0
       color: rgba(255, 255, 255, 0.4)
+      padding: 0
       .content-left
         flex: 1
         .logo-wrapper
