@@ -74,7 +74,7 @@
         this.showFlag = true;
         // 状态初始化
         this.selectType = ALL;
-        this.onlyContent = true;
+        this.onlyContent = false;
 
         this.$nextTick(() => {
           if (!this.scroll) {
@@ -109,6 +109,11 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  .move-enter-active, .move-leave-active
+    transition: all .5s
+
+  .move-enter, .move-leave-active
+    transform: translate3d(100%, 0, 0);
   .food
     position: fixed
     left: 0
@@ -117,13 +122,6 @@
     z-index: 30
     width: 100%
     background: #fff
-
-  .move-enter-active, .move-leave-active
-    transition: all .5s
-
-  .move-enter, .move-leave-active
-    transform: translate3d(100%, 0, 0);
-
     .image-header
       position: relative
       width: 100%
