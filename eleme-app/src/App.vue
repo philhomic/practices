@@ -12,27 +12,37 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view :seller="seller"></router-view>
+    <keep-alive>
+      <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import header from '@/components/header/header.vue';
+  import {urlParse} from '@/common/js/util';
 
   const ERR_OK = 0;
 
   export default {
     data() {
       return {
-        seller: {}
+        seller: {
+          id: (() => {
+            let queryParam = urlParse();
+            // console.log(queryParam);
+            return queryParam.id;
+          })()
+        }
       };
     },
     created() {
-      this.$http.get('/api/seller').then((response) => {
+      this.$http.get('/api/seller?id=' + this.seller.id).then((response) => {
         response = response.body;
         if (response.errno === ERR_OK) {
-          this.seller = response.data;
-          // console.log(this.seller);
+         // console.log(this.seller.id);
+          this.seller = Object.assign({}, this.seller, response.data);
+          // console.log(this.seller.id);
         }
       }
       // 因为是mock的数据，所以肯定会成功，所以这里就不添加error的函数了
